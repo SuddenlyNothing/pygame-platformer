@@ -5,9 +5,9 @@ import pygame
 pygame.init()
 
 import globals
-from level import Level
+from level_manager import LevelManager
 
-level = Level()
+level_manager = LevelManager()
 
 while True:
   globals.update_events()
@@ -17,7 +17,7 @@ while True:
       quit()
   globals.SCREEN.fill(globals.BACKGROUND_COLOR)
 
-  level.update()
+  level_manager.update()
 
   pygame.display.flip()
   globals.CLOCK.tick(60)

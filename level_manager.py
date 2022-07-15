@@ -1,6 +1,10 @@
 import pygame
+from level import Level
 
 class LevelManager():
 
   def __init__(self) -> None:
-    pass
+    self.level = Level()
+
+  def update(self) -> None:
+    self.level.update()
