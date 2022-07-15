@@ -4,7 +4,7 @@ from timer import Timer
 class Player(pygame.sprite.Sprite):
 
   WIDTH = 10
-  HEIGHT = 50
+  HEIGHT = 10
 
   jump_key = pygame.K_SPACE
   left = pygame.K_a
@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
   _ACCELERATION = 0.5
   _MAX_SPEED = 3
   _FRICTION = 0.25
-  _COYOTE_TIME = 0.15
+  _COYOTE_TIME = 0.1
   _BUFFER_TIME = 0.15
 
   _JUMP_SFX = pygame.mixer.Sound("assets/sfx/jump.wav")
@@ -87,14 +87,18 @@ class Player(pygame.sprite.Sprite):
         else:
           found_slip = False
           for i in range(1, 6):
-            if found_slip:
-              break
             for j in [-1, 1]:
               self.move_rect(i * j, 0)
-              if not self.rect.colliderect(tile.rect):
-                found_slip = True
+              found_slip = True
+              for tile in tiles:
+                if self.rect.colliderect(tile.rect):
+                  found_slip = False
+                  break
+              if found_slip:
                 break
               self.move_rect(-i * j, 0)
+            if found_slip:
+              break
           if found_slip:
             break
           self.set_rect_y(tile.rect.centery + tile.HEIGHT / 2 + self.HEIGHT / 2)
@@ -105,8 +109,6 @@ class Player(pygame.sprite.Sprite):
       self.coyote_timer.start()
 
   def apply_gravity(self) -> None:
-    if not self.coyote_timer.is_stopped():
-      return
     self.velocity.y += self._GRAVITY
     if self.velocity.y > self._MAX_FALL_SPEED:
       self.velocity.y = self._MAX_FALL_SPEED
