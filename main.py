@@ -4,26 +4,20 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 pygame.init()
 
-from level_manager import LevelManager
+import globals
+from level import Level
 
-clock = pygame.time.Clock()
-screen = pygame.display.set_mode((1020, 600))
-background_color = [18, 152, 196]
-
-pygame.mixer.music.load("assets/music/music.ogg")
-pygame.mixer.music.play(-1)
-
-level_manager = LevelManager()
+level = Level()
 
 while True:
-  events = pygame.event.get()
-  for event in events:
+  globals.update_events()
+  for event in globals.EVENTS:
     if event.type == pygame.QUIT:
       pygame.quit()
       quit()
-  screen.fill(background_color)
+  globals.SCREEN.fill(globals.BACKGROUND_COLOR)
 
-  level_manager.update(screen)
+  level.update()
 
   pygame.display.flip()
-  clock.tick(60)
+  globals.CLOCK.tick(60)
