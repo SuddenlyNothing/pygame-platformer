@@ -33,11 +33,12 @@ class Level():
       for x in range(len(self.level[y])):
         if self.level[y][x] == self.TILE:
           self.tile_group.add(
-            Tile(Tile.WIDTH / 2 + x * Tile.WIDTH, Tile.HEIGHT / 2 + y * Tile.HEIGHT)
+            Tile(globals.TILE_WIDTH / 2 + x * globals.TILE_WIDTH, globals.TILE_HEIGHT / 2 + y * globals.TILE_HEIGHT)
           )
         elif self.level[y][x] == self.PLAYER:
           self.tile_collision_group.add(
-            Player(Tile.WIDTH / 2 + x * Tile.WIDTH, Tile.HEIGHT / 2 + y * Tile.HEIGHT + (Tile.HEIGHT - Player.HEIGHT) / 2)
+            Player(globals.TILE_WIDTH / 2 + x * globals.TILE_WIDTH,
+                globals.TILE_HEIGHT / 2 + y * globals.TILE_HEIGHT + (globals.TILE_HEIGHT - Player.HEIGHT) / 2)
           )
   
   def load_level_file(self) -> bool:

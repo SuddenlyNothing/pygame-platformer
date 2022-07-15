@@ -1,9 +1,10 @@
 import pygame
+import globals
 
 class LevelEditor():
 
-  LEVEL_WIDTH = 1020 // 20
-  LEVEL_HEIGHT = 600 // 20
+  LEVEL_WIDTH = globals.SCREEN_WIDTH // globals.TILE_WIDTH
+  LEVEL_HEIGHT = globals.SCREEN_HEIGHT // globals.TILE_HEIGHT
 
   def __init__(self, level: list = []) -> None:
     self.level = level

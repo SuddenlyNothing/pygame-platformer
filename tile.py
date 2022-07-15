@@ -1,9 +1,10 @@
 import pygame
+import globals
 
 class Tile(pygame.sprite.Sprite):
 
-  WIDTH = 20
-  HEIGHT = 20
+  WIDTH = globals.TILE_WIDTH
+  HEIGHT = globals.TILE_HEIGHT
 
   _color = [100, 100, 100]
 
