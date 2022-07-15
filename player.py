@@ -4,7 +4,7 @@ from timer import Timer
 class Player(pygame.sprite.Sprite):
 
   WIDTH = 10
-  HEIGHT = 10
+  HEIGHT = 50
 
   jump_key = pygame.K_SPACE
   left = pygame.K_a
@@ -101,9 +101,12 @@ class Player(pygame.sprite.Sprite):
         self.velocity.y = 0
         break
     if not self.is_on_floor and was_on_floor and self.velocity.y >= 0:
+      self.velocity.y = 0
       self.coyote_timer.start()
 
   def apply_gravity(self) -> None:
+    if not self.coyote_timer.is_stopped():
+      return
     self.velocity.y += self._GRAVITY
     if self.velocity.y > self._MAX_FALL_SPEED:
       self.velocity.y = self._MAX_FALL_SPEED
